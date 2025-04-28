@@ -9,10 +9,11 @@ public class ThemeTemplate : MonoBehaviour
 
     public Texture[] deepTextures;
     public Texture[] groundTextures;
-    
+    public Texture[] ceilingTextures;
+
     public Texture[] waterObstacleTextures;
     public Texture[] groundObstacleTextures;
-    public Texture[] ceilingObstacleTextures;
+    public Texture[] ceilingObstacleTextures; 
     //public Texture[] flyingObstaccleTextures;
 
     private void Start()
