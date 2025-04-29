@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8b73ab981c81ca342a8450a408f86661
+guid: 6b70a3d2370358445962ad0f99e0b2d5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8769244495592423625
-    second: Missing_Texture_0
+      213: 834058255004067983
+    second: White_Wool_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Missing_Texture_0
+      name: White_Wool_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9c00654486d92b970800000000000000
-      internalID: 8769244495592423625
+      spriteID: f88ef7b509b239b00800000000000000
+      internalID: 834058255004067983
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Missing_Texture_0: 8769244495592423625
+      White_Wool_0: 834058255004067983
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

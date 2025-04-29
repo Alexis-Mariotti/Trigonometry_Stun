@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8b73ab981c81ca342a8450a408f86661
+guid: b4bb97f72ccd1624d888a8bca096310f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8769244495592423625
-    second: Missing_Texture_0
+      213: -889929422122900973
+    second: Purple_Wool_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Missing_Texture_0
+      name: Purple_Wool_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9c00654486d92b970800000000000000
-      internalID: 8769244495592423625
+      spriteID: 3122237d7e556a3f0800000000000000
+      internalID: -889929422122900973
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Missing_Texture_0: 8769244495592423625
+      Purple_Wool_0: -889929422122900973
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

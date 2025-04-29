@@ -5,16 +5,16 @@ using UnityEngine;
 [System.Serializable]
 public class ThemeTemplate : MonoBehaviour
 {
-    public Texture background;
+    public Sprite background;
 
-    public Texture[] deepTextures;
-    public Texture[] groundTextures;
-    public Texture[] ceilingTextures;
+    public Sprite[] deepTextures;
+    public Sprite[] groundTextures;
+    public Sprite[] ceilingTextures;
 
-    public Texture[] waterObstacleTextures;
-    public Texture[] groundObstacleTextures;
-    public Texture[] ceilingObstacleTextures; 
-    //public Texture[] flyingObstaccleTextures;
+    public Sprite[] waterObstacleTextures;
+    public Sprite[] groundObstacleTextures;
+    public Sprite[] ceilingObstacleTextures;
+    //public Sprite[] flyingObstaccleTextures;
 
     private void Start()
     {
