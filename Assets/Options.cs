@@ -4,38 +4,48 @@ using TMPro;
 
 public class Options : MonoBehaviour
 {
-    public AudioSource audioSource;
-    public Slider slider;
-    public TMP_Text txtVolume;
+    public AudioSource audioSourceBackground;
+    public Slider sliderBackground;
+    public TMP_Text txtVolumeBackground;
+
+    public AudioSource audioSourceSFX;
+    public Slider sliderSFX;
+    public TMP_Text txtVolumeSFX;
+
     public Toggle toggleMute;
 
     void Start()
     {
-        SliderChange();
-        toggleMute.isOn = audioSource.mute;
+        SliderBackgroundChange();
+        SliderSFXChange();
+        toggleMute.isOn = false;
+        audioSourceBackground.mute = false;
+        audioSourceSFX.mute = false;
     }
 
-    void Update()
+    public void SliderBackgroundChange()
     {
-    
+        audioSourceBackground.volume = sliderBackground.value;
+        txtVolumeBackground.text = (audioSourceBackground.volume * 100).ToString("00") + "%";
     }
 
-    public void SliderChange()
+    public void SliderSFXChange()
     {
-        audioSource.volume = slider.value;
-        txtVolume.text = (audioSource.volume * 100).ToString("00") + "%";
+        audioSourceSFX.volume = sliderSFX.value;
+        txtVolumeSFX.text = (audioSourceSFX.volume * 100).ToString("00") + "%";
     }
 
     public void Mute()
     {
-        if (audioSource.mute)
+        if (audioSourceBackground.mute)
         {
-            audioSource.mute = false;
-        }
-        else
+            audioSourceBackground.mute = false;
+            audioSourceSFX.mute = false;
+        } else
         {
-            audioSource.mute = true;
+            audioSourceBackground.mute = true;
+            audioSourceSFX.mute = true;
         }
-        toggleMute.isOn = audioSource.mute;
+        toggleMute.isOn = audioSourceBackground.mute;
     }
 }
