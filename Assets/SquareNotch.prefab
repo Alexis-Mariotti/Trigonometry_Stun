@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 963472728252909260}
   - component: {fileID: 7700167177927869863}
   - component: {fileID: 4444437421919264214}
+  - component: {fileID: 3911332035511983932}
   m_Layer: 0
   m_Name: SquareNotch
   m_TagString: Player
@@ -177,3 +178,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   jumpForce: 20
+--- !u!114 &3911332035511983932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2363547602824042081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f168b9886c138e14aa3f4b4313da6367, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathParticules: {fileID: 4972407635626889447, guid: 2077bda0c93db3d4d87898d6e7bd5af2, type: 3}
+  spawnCoordinates: {x: 0, y: 0}

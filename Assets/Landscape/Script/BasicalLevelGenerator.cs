@@ -84,10 +84,7 @@ public class BasicalLevelGenerator : MonoBehaviour
             {
                 // instanciate nothing for letting space to player
                 //  j > lastGrounLevel + 2 --> avoid the formation of impassable "towers"
-                Debug.Log("je break");
-                Debug.Log(j);
-                Debug.Log(lastGrounLevel);
-                lastJ = j + 2;
+                lastJ = j + 1;
                 break;
             }
             else
