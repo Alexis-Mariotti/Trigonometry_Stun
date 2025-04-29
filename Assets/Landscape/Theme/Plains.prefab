@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4009114377414259983
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3895965041800763562}
+  - component: {fileID: 8876857809943176449}
+  m_Layer: 0
+  m_Name: Plains
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3895965041800763562
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4009114377414259983}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.20574, y: 1.07426, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8876857809943176449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4009114377414259983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af66fe66b4379b74e8d72148c09f2255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  background: {fileID: 21300000, guid: dd3cfb18bced8cc438d3c94e974c5b08, type: 3}
+  deepTextures:
+  - {fileID: 21300000, guid: 86cd3f57df385e844aa0ba5243050fa7, type: 3}
+  - {fileID: 21300000, guid: 52f5ff532b630ee4aa93511b3f55c652, type: 3}
+  - {fileID: 21300000, guid: 876d82fa23adc794486787c920bf2c33, type: 3}
+  groundTextures:
+  - {fileID: 21300000, guid: 969db046db2963d4aa97bcb5f797c4b8, type: 3}
+  - {fileID: 21300000, guid: 7af16426a58691441aa4c8933ba82103, type: 3}
+  ceilingTextures:
+  - {fileID: 21300000, guid: 95fb3abc20875d5469adf3e58f2b6198, type: 3}
+  - {fileID: 21300000, guid: 6b70a3d2370358445962ad0f99e0b2d5, type: 3}
+  - {fileID: 21300000, guid: b4bb97f72ccd1624d888a8bca096310f, type: 3}
+  waterObstacleTextures:
+  - {fileID: 21300000, guid: a64eaa0c503fdf843ba0d501c22cef0b, type: 3}
+  groundObstacleTextures:
+  - {fileID: 21300000, guid: cf433e1d293833340a634fbbc046beeb, type: 3}
+  - {fileID: 21300000, guid: 183a9a3560811f54c8b3c72a0c7a255b, type: 3}
+  - {fileID: 21300000, guid: 4127d2e526e15404bb6b2ee22c322a53, type: 3}
+  - {fileID: 21300000, guid: b60d533ca6aae6d43a05f3a543aa337f, type: 3}
+  - {fileID: 21300000, guid: 03f99635ca777b743b94dc2dfc33fa36, type: 3}
+  - {fileID: 21300000, guid: ba9b1ae363affc14aa16a7a6b4a42a62, type: 3}
+  - {fileID: 21300000, guid: 250609807dc02244abf073303a512083, type: 3}
+  - {fileID: 21300000, guid: ccc348ecfae0c954f8050e5d22f58c05, type: 3}
+  - {fileID: 21300000, guid: 56effe57acfe2294791b0f8b98c40101, type: 3}
+  - {fileID: 21300000, guid: 886b722325013ba429a77dc82a6327bc, type: 3}
+  - {fileID: 21300000, guid: 3dffc8bdbbfc7d44fa5201b445455985, type: 3}
+  - {fileID: 21300000, guid: 73c108c8c90525945af881266b9e9e6f, type: 3}
+  - {fileID: 21300000, guid: 68b8a87258bdfd64b812ef827deeee83, type: 3}
+  ceilingObstacleTextures:
+  - {fileID: 21300000, guid: 299ff8d27589cc24c90ea0bce04ebb50, type: 3}
+  - {fileID: 21300000, guid: f9ed929c21d2a224eae491783e4553b5, type: 3}
