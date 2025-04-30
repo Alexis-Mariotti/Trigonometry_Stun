@@ -34,16 +34,16 @@ public class PlayerActions : MonoBehaviour
 
     private IEnumerator waitForParticulesEndAndRespawn(float particuleDuration)
     {
-        if (gameObject.activeInHierarchy)
-            gameObject.SetActive(false); // disabling the player
+        // disabling the player
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
 
         yield return new WaitForSeconds(particuleDuration);
 
-        gameObject.SetActive(true);
-        Debug.Log("je suis pas la");
-
         // enabling the player
-        gameObject.SetActive(true);
+        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+
         respawn();
     }
 
@@ -65,8 +65,18 @@ public class PlayerActions : MonoBehaviour
         {
             onObstacleColissionEnter(collision);
         }
+    }
 
-
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            onGroundColissionEnter(collision);
+        }
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            onObstacleColissionEnter(collision);
+        }
     }
 
     // handle collisions with ground
@@ -74,66 +84,66 @@ public class PlayerActions : MonoBehaviour
     {
         // Print how many points are colliding with this transform
         Debug.Log("Points colliding: " + collision.contacts.Length);
-        // foreach (var colisionItem in collision.contacts)
-        //{
-        var colisionItem = collision.contacts[0];
+        foreach (var colisionItem in collision.contacts)
+        {
+        //var colisionItem = collision.contacts[0];
 
 
             // Print the normal of the first point in the collision.
             Debug.Log("Normal of the first point: " + colisionItem.normal);
             // left size
-            if (colisionItem.normal.y <= -0.99)
+            if (colisionItem.normal.y <= -1.0)
             {
                 Dead();
             }
             // top size
-            else if (colisionItem.normal.x >= 0.99)
+            else if (colisionItem.normal.x >= 1.0)
             {
 
             }
             // rigth size
-            else if (colisionItem.normal.y >= 0.99)
+            else if (colisionItem.normal.y >= 1.0)
             {
 
             }
             // bottom size
-            else if (colisionItem.normal.x <= -0.99)
+            else if (colisionItem.normal.x <= -1.0)
             {
                 Dead();
             }
-        // }
+        }
     }
 
     // handle colisions with obstacle
     private void onObstacleColissionEnter(Collision2D collision)
     {
-        //foreach (var colisionItem in collision.contacts)
-        //{
-        var colisionItem = collision.contacts[0];
+        foreach (var colisionItem in collision.contacts)
+        {
+        //var colisionItem = collision.contacts[0];
             // left size
-            if (colisionItem.normal.y <= -0.99)
+            if (colisionItem.normal.y <= -1.0)
             {
                 Dead();
 
             }
             // top size
-            else if(colisionItem.normal.x >= 0.99)
+            else if(colisionItem.normal.x >= 1.0)
             {
                 Dead();
 
             }
             // rigth size
-            else if(colisionItem.normal.y >= 0.99)
+            else if(colisionItem.normal.y >= 1.0)
             {
                 Dead();
 
             }
             // bottom size
-            else if(colisionItem.normal.x <= -0.99)
+            else if(colisionItem.normal.x <= -1.0)
             {
                 Dead();
 
             }
-        //}
+        }
     }
 }
