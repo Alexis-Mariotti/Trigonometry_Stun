@@ -1,36 +1,50 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class PlayerActions : MonoBehaviour
 {
     public ParticleSystem deathParticules;
     public Vector2 spawnCoordinates;
+    public TMP_Text txtTry;
+    public string lvlIdx;
 
     private Transform playerTransform;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private int currentTry;
+
     void Start()
     {
         playerTransform = transform;
-        
+
+        currentTry = PlayerPrefs.GetInt($"tryMap{lvlIdx}", 0);
+        if (txtTry != null)
+        {
+            txtTry.text = "Try : " + currentTry.ToString();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        PlayerPrefs.SetInt($"tryMap{lvlIdx}", 0);
+        PlayerPrefs.Save();
+    }
+
+    public void AddTry()
+    {
+        currentTry++;
+        txtTry.text = "Try : " + currentTry.ToString();
     }
 
     public void Dead()
     {
-
-        // TODO: increase death score
         // TODO: play death sound
-
 
         Instantiate(deathParticules, transform.position, Quaternion.identity);
         // wait for particules to end and teleport to spawwn point
         StartCoroutine(waitForParticulesEndAndRespawn(deathParticules.main.duration));
+
+        AddTry();
     }
 
     private IEnumerator waitForParticulesEndAndRespawn(float particuleDuration)
