@@ -1,5 +1,6 @@
+using System;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class BasicalLevelGenerator : MonoBehaviour
@@ -13,6 +14,12 @@ public class BasicalLevelGenerator : MonoBehaviour
 
     public int levelLength;
     public int levelHeight;
+    public int x;
+    public int y;
+
+    // varriable to prevent suite of obstaclees
+    private int groundObstacleWait = 0;
+    private int lastGrounLevel;
 
 
     public void generate()
@@ -23,10 +30,14 @@ public class BasicalLevelGenerator : MonoBehaviour
         // setting the background texture
         setBackgroundTexture(theme);
 
+        bool isCeilingBefore = false;
+        groundObstacleWait = 0;
+        // instanciate lastgroundlevel
+        lastGrounLevel = (int)Math.Round(levelHeight * 0.3);
         for (int i = 0; i < levelLength; i++)
         {
             int lastJ = 0;
-            bool isCeilingBefore = false;
+
             // we separate the level in 3 diifferents layers
             // the undeground, the the ground and the ceiling
             lastJ = generateUnderground(i, theme);
@@ -44,9 +55,9 @@ public class BasicalLevelGenerator : MonoBehaviour
         // the underground represent the 30% down of the level
         for (int j = 0; j < levelHeight * 0.3; j++)
         {
-            GameObject groundBlock = Instantiate(classicBlock, new Vector2(i, j), Quaternion.identity);
-            groundBlock.transform.parent = this.transform;
-            groundBlock.GetComponent<SpriteRenderer>().material.mainTexture = theme.deepTextures[Random.Range(0, theme.deepTextures.Length)];
+            GameObject groundBlock = Instantiate(classicBlock, new Vector2(i +x, j +y), Quaternion.identity, this.transform);
+            groundBlock.GetComponent<SpriteRenderer>().sprite = theme.deepTextures[UnityEngine.Random.Range(0, theme.deepTextures.Length)];
+
             // updating last J
             lastJ = j;
         }
@@ -55,51 +66,65 @@ public class BasicalLevelGenerator : MonoBehaviour
 
     private int generateGround(int i, ThemeTemplate theme, int startingJ)
     {
+        int groundObstacleWaitTime = 2;
+
         int lastJ = startingJ;
 
         // the groud represent the 40% midle of the level
         double stopingCondition = startingJ + levelHeight * 0.4;
 
         bool isBlockUnder = true;
-        bool isObstacleBefore = false;
+
+        int currentGroundLevel = lastGrounLevel;
 
         for (int j = startingJ; j < stopingCondition; j++)
         {
             // keep a 2 free space on top of ground
-            if (j + 2 > stopingCondition)
+            if ((j + 1 > stopingCondition) || j > lastGrounLevel + 1)
             {
-                continue;
-            } else
+                // instanciate nothing for letting space to player
+                //  j > lastGrounLevel + 2 --> avoid the formation of impassable "towers"
+                lastJ = j + 1;
+                break;
+            }
+            else
             {
                 if (isBlockUnder)
                 {
-                    if (Random.Range(0, 100) > 30 + j * levelHeight * 0.1)
+                    if (UnityEngine.Random.Range(0, 100) > 30 + j * levelHeight * 0.1)
                     {
+                        Debug.Log("Last ground level");
+                        Debug.Log(lastGrounLevel);
+
                         isBlockUnder = true;
 
-                        GameObject block = Instantiate(classicBlock, new Vector2(i, j), Quaternion.identity);
-                        block.transform.parent = this.transform;
-                        block.GetComponent<SpriteRenderer>().material.mainTexture = theme.groundTextures[Random.Range(0, theme.groundTextures.Length)];
+                        GameObject block = Instantiate(classicBlock, new Vector2(i + x, j + y), Quaternion.identity, this.transform);
+                        block.GetComponent<SpriteRenderer>().sprite = theme.groundTextures[UnityEngine.Random.Range(0, theme.groundTextures.Length)];
+                        // Updating the lastGrounLevel 
+                        currentGroundLevel = j;
+
+
                     } else
                     {
                         isBlockUnder = false;
+                        currentGroundLevel = j - 1;
 
-                        if (!isObstacleBefore)
+                        if (groundObstacleWait <= 0)
                         {
-                            if (Random.Range(0,100) > 25) 
+                            if (UnityEngine.Random.Range(0,100) > 25) 
                             {
-                                isObstacleBefore = true;
-
-                                GameObject obstacle = Instantiate(groundObstacle, new Vector2(i, j), Quaternion.identity);
-                                obstacle.transform.parent = this.transform;
-                                obstacle.GetComponent<SpriteRenderer>().material.mainTexture = theme.groundObstacleTextures[Random.Range(0, theme.groundObstacleTextures.Length)];
+                                groundObstacleWait = groundObstacleWaitTime;
+                                Debug.Log("AAA");
+                                Debug.Log(groundObstacle.transform.localScale.y);
+                                GameObject obstacle = Instantiate(groundObstacle, new Vector2(i +x, j +y - (classicBlock.transform.localScale.y - groundObstacle.transform.localScale.y)/2), Quaternion.identity, this.transform);
+                                obstacle.GetComponent<SpriteRenderer>().sprite = theme.groundObstacleTextures[UnityEngine.Random.Range(0, theme.groundObstacleTextures.Length)];
                             } else
                             {
-                                isObstacleBefore = false;
+                                --groundObstacleWait;
                             }
                         } else
                         {
-                            isObstacleBefore = false;
+                            --groundObstacleWait;
                         }
                     }
                 }
@@ -108,7 +133,10 @@ public class BasicalLevelGenerator : MonoBehaviour
             // updating last J
             lastJ = j;
         }
-
+        // updating the lastGroundLevel for future iterations
+        lastGrounLevel = currentGroundLevel;
+        Debug.Log("last J");
+        Debug.Log(lastJ);
         return lastJ;
     }
 
@@ -122,26 +150,25 @@ public class BasicalLevelGenerator : MonoBehaviour
         {
             if (isCeilingBefore)
             {
-                if (Random.Range(0, 100) > 10) 
+                if (UnityEngine.Random.Range(0, 100) > 10) 
                 {
                     isCeilingNow = true;
 
-                    GameObject ceilingBlock = Instantiate(classicBlock, new Vector2(i, startingJ + 1), Quaternion.identity);
-                    ceilingBlock.transform.parent = this.transform;
-                    ceilingBlock.GetComponent<SpriteRenderer>().material.mainTexture = theme.ceilingTextures[Random.Range(0, theme.ceilingTextures.Length)];
+                    GameObject ceilingBlock = Instantiate(classicBlock, new Vector2(i +x, startingJ + 1 +y), Quaternion.identity, this.transform);
+                    ceilingBlock.GetComponent<SpriteRenderer>().sprite = theme.ceilingTextures[UnityEngine.Random.Range(0, theme.ceilingTextures.Length)];
                     // updating last J
                     lastJ = startingJ + 1;
                 }
             }
             else
             {
-                if (Random.Range(0, 100) > 80)
+                if (UnityEngine.Random.Range(0, 100) > 80)
                 {
                     isCeilingNow = true;
 
-                    GameObject ceilingBlock = Instantiate(classicBlock, new Vector2(i, startingJ + 1), Quaternion.identity);
-                    ceilingBlock.transform.parent = this.transform;
-                    ceilingBlock.GetComponent<SpriteRenderer>().material.mainTexture = theme.ceilingTextures[Random.Range(0, theme.ceilingTextures.Length)];
+                    GameObject ceilingBlock = Instantiate(classicBlock, new Vector2(i +x, startingJ + 1 +y), Quaternion.identity, this.transform);
+                    int randomIntLa = UnityEngine.Random.Range(0, theme.ceilingTextures.Length);
+                    ceilingBlock.GetComponent<SpriteRenderer>().sprite = theme.ceilingTextures[randomIntLa];
                     // updating last J
                     lastJ = startingJ + 1;
                 }
@@ -151,37 +178,36 @@ public class BasicalLevelGenerator : MonoBehaviour
 
         if (isCeilingNow)
         {
-            if (Random.Range(0,100) > 65)
+            if (UnityEngine.Random.Range(0,100) > 65)
             {
-                GameObject obstalce = Instantiate(ceilingObstalce, new Vector2(i, startingJ), Quaternion.identity);
-                obstalce.GetComponent<SpriteRenderer>().material.mainTexture = theme.ceilingObstacleTextures[Random.Range(0, theme.ceilingObstacleTextures.Length)];
+                GameObject obstalce = Instantiate(ceilingObstalce, new Vector2(i +x, startingJ + y), Quaternion.identity, this.transform);
+                obstalce.GetComponent<SpriteRenderer>().sprite = theme.ceilingObstacleTextures[UnityEngine.Random.Range(0, theme.ceilingObstacleTextures.Length)];
             }
-
+            /**
             for (int j = startingJ + 2; j < levelHeight; j++)
             {
-                int randomInt = Random.Range(0, 100);
-                if (isCeilingBefore)
+                if (UnityEngine.Random.Range(0, 100) > 30)
                 {
-                    if (randomInt > 10)
-                    {
-
-                    }
+                    GameObject ceilingBlock = Instantiate(classicBlock, new Vector2(i + x, j + y), Quaternion.identity, this.transform);
+                    ceilingBlock.GetComponent<SpriteRenderer>().sprite = theme.ceilingTextures[UnityEngine.Random.Range(0, theme.ceilingTextures.Length)];
                 }
-                GameObject ceilingBlock = Instantiate(classicBlock, new Vector2(i, j), Quaternion.identity);
-                ceilingBlock.transform.parent = this.transform;
-                ceilingBlock.GetComponent<SpriteRenderer>().material.mainTexture = theme.ceilingTextures[Random.Range(0, theme.ceilingTextures.Length)];
+
+
                 // updating last J
                 lastJ = j;
             }
+            **/
+
         }
+
 
         return isCeilingNow;
     }
 
     private void setBackgroundTexture(ThemeTemplate theme)
     {
-        Image bgImage = backbground.GetComponent<Image>();
-        bgImage.image = theme.background;
+        Image bgImage = backbground.GetComponentInChildren<Image>();
+        bgImage.sprite = theme.background;
     }
 
     private void Start()
