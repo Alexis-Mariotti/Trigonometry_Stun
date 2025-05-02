@@ -27,7 +27,8 @@ public class BasicalLevelGenerator : MonoBehaviour
     private double ceilingSize;
 
     // varriable to prevent suite of obstaclees
-    private int groundObstacleWait = 5;
+    private int groundObstacleWait;
+    private const int groundObstacleWaitTime = 2;
     private int lastGrounLevel;
 
 
@@ -40,7 +41,7 @@ public class BasicalLevelGenerator : MonoBehaviour
         setBackgroundTexture(theme);
 
         bool isCeilingBefore = false;
-        groundObstacleWait = 0;
+        groundObstacleWait = 5;
         // instanciate lastgroundlevel
         lastGrounLevel = (int)Math.Round(groundSize);
         for (int i = 0; i < levelLength; i++)
@@ -52,7 +53,7 @@ public class BasicalLevelGenerator : MonoBehaviour
             lastJ = generateUnderground(ref i, theme);
             lastJ += 1;
             lastJ = generateGround(ref i, theme, lastJ);
-            lastJ += 1;
+            lastJ += 2;
             isCeilingBefore = generateCeiling(ref i, theme, lastJ, isCeilingBefore);
 
         }
@@ -85,7 +86,6 @@ public class BasicalLevelGenerator : MonoBehaviour
 
     private int generateGround(ref int i, ThemeTemplate theme, int startingJ)
     {
-        int groundObstacleWaitTime = 2;
 
         int lastJ = startingJ;
 
