@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 251487620391697763}
   m_Layer: 0
   m_Name: ClassicGroundOstacle
-  m_TagString: Ground
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

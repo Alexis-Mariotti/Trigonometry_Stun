@@ -75,3 +75,5 @@ MonoBehaviour:
   ceilingObstacleTextures:
   - {fileID: 21300000, guid: 299ff8d27589cc24c90ea0bce04ebb50, type: 3}
   - {fileID: 21300000, guid: f9ed929c21d2a224eae491783e4553b5, type: 3}
+  portalBorderTexture: {fileID: 21300000, guid: 79f745f78fd29d7428ff5b53c6791ebd, type: 3}
+  portalCenterTexture: {fileID: 21300000, guid: a64eaa0c503fdf843ba0d501c22cef0b, type: 3}

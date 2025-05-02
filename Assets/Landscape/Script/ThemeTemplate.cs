@@ -14,7 +14,11 @@ public class ThemeTemplate : MonoBehaviour
     public Sprite[] waterObstacleTextures;
     public Sprite[] groundObstacleTextures;
     public Sprite[] ceilingObstacleTextures;
-    //public Sprite[] flyingObstaccleTextures;
+
+    public Sprite portalBorderTexture;
+    public Sprite portalCenterTexture;
+
+
 
     private void Start()
     {
