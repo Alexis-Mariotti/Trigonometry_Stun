@@ -12,13 +12,22 @@ public class BasicalLevelGenerator : MonoBehaviour
     public GameObject ceilingObstalce;
     public Canvas backbground;
 
+    // portals
+    public GameObject endPortal;
+    public GameObject[] bonusPortals;
+    private const int bonusWait = 15;
+    private int bonusCouldown = bonusWait;
+
     public int levelLength;
     public int levelHeight;
     public int x;
     public int y;
 
+    private double groundSize;
+    private double ceilingSize;
+
     // varriable to prevent suite of obstaclees
-    private int groundObstacleWait = 0;
+    private int groundObstacleWait = 5;
     private int lastGrounLevel;
 
 
@@ -33,27 +42,37 @@ public class BasicalLevelGenerator : MonoBehaviour
         bool isCeilingBefore = false;
         groundObstacleWait = 0;
         // instanciate lastgroundlevel
-        lastGrounLevel = (int)Math.Round(levelHeight * 0.3);
+        lastGrounLevel = (int)Math.Round(groundSize);
         for (int i = 0; i < levelLength; i++)
         {
             int lastJ = 0;
 
             // we separate the level in 3 diifferents layers
             // the undeground, the the ground and the ceiling
-            lastJ = generateUnderground(i, theme);
+            lastJ = generateUnderground(ref i, theme);
             lastJ += 1;
-            lastJ = generateGround(i, theme, lastJ);
+            lastJ = generateGround(ref i, theme, lastJ);
             lastJ += 1;
-            isCeilingBefore = generateCeiling(i, theme, lastJ, isCeilingBefore);
+            isCeilingBefore = generateCeiling(ref i, theme, lastJ, isCeilingBefore);
 
         }
+
+        // Adding END PORTAL
+        GameObject portal = Instantiate(endPortal, new Vector2(levelLength + 1 + x, y), Quaternion.identity, this.transform);
+        float yScale = levelHeight / 3;
+        float xScale = yScale * 2 / 3;
+
+        portal.transform.localScale = new Vector2(xScale, yScale);
+
+        // Setting the textures from the theme
+        setPortalTextures(portal, theme);
     }
 
-    private int generateUnderground(int i, ThemeTemplate theme)
+    private int generateUnderground(ref int i, ThemeTemplate theme)
     {
         int lastJ = 0;
         // the underground represent the 30% down of the level
-        for (int j = 0; j < levelHeight * 0.3; j++)
+        for (int j = 0; j < groundSize; j++)
         {
             GameObject groundBlock = Instantiate(classicBlock, new Vector2(i +x, j +y), Quaternion.identity, this.transform);
             groundBlock.GetComponent<SpriteRenderer>().sprite = theme.deepTextures[UnityEngine.Random.Range(0, theme.deepTextures.Length)];
@@ -64,83 +83,135 @@ public class BasicalLevelGenerator : MonoBehaviour
         return lastJ;
     }
 
-    private int generateGround(int i, ThemeTemplate theme, int startingJ)
+    private int generateGround(ref int i, ThemeTemplate theme, int startingJ)
     {
         int groundObstacleWaitTime = 2;
 
         int lastJ = startingJ;
 
         // the groud represent the 40% midle of the level
-        double stopingCondition = startingJ + levelHeight * 0.4;
+        double stopingCondition = startingJ + ceilingSize;
 
         bool isBlockUnder = true;
 
         int currentGroundLevel = lastGrounLevel;
 
-        for (int j = startingJ; j < stopingCondition; j++)
+        // creating a bonus portal if it's possible
+        if (bonusCouldown <= 0 && UnityEngine.Random.Range(0, 100) > 80)
         {
-            // keep a 2 free space on top of ground
-            if ((j + 1 > stopingCondition) || j > lastGrounLevel + 1)
+            // reset the bonus  couldown
+            bonusCouldown = bonusWait;
+
+            GameObject portalToInstanciate = bonusPortals[UnityEngine.Random.Range(0, bonusPortals.Length)];
+
+            GameObject portal = Instantiate(portalToInstanciate, new Vector2(i + x,currentGroundLevel + -0.5f + y), Quaternion.identity, this.transform);
+            float yScale = ((float)stopingCondition - currentGroundLevel) / 3;
+            float xScale = yScale * 2 / 3;
+            portal.transform.localScale = new Vector2(xScale, yScale);
+            // Setting the textures from the theme
+            setPortalTextures(portal, theme);
+
+            // the space to let free for the portal
+            float portalGroundSpace = xScale * 3 + 1;
+            // instanciating portal pdestal
+            if (currentGroundLevel > (int)Math.Round(groundSize))
             {
-                // instanciate nothing for letting space to player
-                //  j > lastGrounLevel + 2 --> avoid the formation of impassable "towers"
-                lastJ = j + 1;
-                break;
-            }
-            else
-            {
-                if (isBlockUnder)
+                // letting free space for the portal
+                for (int k = 0; k < portalGroundSpace; k++)
                 {
-                    if (UnityEngine.Random.Range(0, 100) > 30 + j * levelHeight * 0.1)
+                    // filling the ground under portal
+                    for (int h = startingJ; h < currentGroundLevel; h++)
                     {
-                        Debug.Log("Last ground level");
-                        Debug.Log(lastGrounLevel);
-
-                        isBlockUnder = true;
-
-                        GameObject block = Instantiate(classicBlock, new Vector2(i + x, j + y), Quaternion.identity, this.transform);
+                        GameObject block = Instantiate(classicBlock, new Vector2(i + x, h + y), Quaternion.identity, this.transform);
                         block.GetComponent<SpriteRenderer>().sprite = theme.groundTextures[UnityEngine.Random.Range(0, theme.groundTextures.Length)];
-                        // Updating the lastGrounLevel 
-                        currentGroundLevel = j;
+                    }
 
+                    // updating the global i
+                    generateUnderground(ref i, theme);
+                    ++i;
+                }
+                --i;
+            } else
+            {
+                // letting free space for the portal
+                for (int k = 0; k < portalGroundSpace; k++)
+                {
+                    generateUnderground(ref i, theme);
+                    ++i;
+                }
+                --i;
+            }
 
-                    } else
+            lastJ = (int)stopingCondition;
+        }
+        else
+        {
+
+            for (int j = startingJ; j < stopingCondition; j++)
+            {
+                // keep a 2 free space on top of ground
+                if ((j + 1 > stopingCondition) || j > lastGrounLevel + 1)
+                {
+                    // instanciate nothing for letting space to player
+                    //  j > lastGrounLevel + 2 --> avoid the formation of impassable "towers"
+                    lastJ = j + 1;
+                    break;
+                }
+                else
+                {
+                    if (isBlockUnder)
                     {
-                        isBlockUnder = false;
-                        currentGroundLevel = j - 1;
-
-                        if (groundObstacleWait <= 0)
+                        if (UnityEngine.Random.Range(0, 100) > 30 + j * levelHeight * 0.1)
                         {
-                            if (UnityEngine.Random.Range(0,100) > 25) 
+                            isBlockUnder = true;
+
+                            GameObject block = Instantiate(classicBlock, new Vector2(i + x, j + y), Quaternion.identity, this.transform);
+                            block.GetComponent<SpriteRenderer>().sprite = theme.groundTextures[UnityEngine.Random.Range(0, theme.groundTextures.Length)];
+                            // Updating the lastGrounLevel 
+                            currentGroundLevel = j;
+
+
+                        }
+                        else
+                        {
+                            isBlockUnder = false;
+                            currentGroundLevel = j - 1;
+
+                            if (groundObstacleWait <= 0)
                             {
-                                groundObstacleWait = groundObstacleWaitTime;
-                                Debug.Log("AAA");
-                                Debug.Log(groundObstacle.transform.localScale.y);
-                                GameObject obstacle = Instantiate(groundObstacle, new Vector2(i +x, j +y - (classicBlock.transform.localScale.y - groundObstacle.transform.localScale.y)/2), Quaternion.identity, this.transform);
-                                obstacle.GetComponent<SpriteRenderer>().sprite = theme.groundObstacleTextures[UnityEngine.Random.Range(0, theme.groundObstacleTextures.Length)];
-                            } else
+                                if (UnityEngine.Random.Range(0, 100) > 25)
+                                {
+                                    groundObstacleWait = groundObstacleWaitTime;
+
+                                    GameObject obstacle = Instantiate(groundObstacle, new Vector2(i + x, j + y - (classicBlock.transform.localScale.y - groundObstacle.transform.localScale.y) / 2), Quaternion.identity, this.transform);
+                                    obstacle.GetComponent<SpriteRenderer>().sprite = theme.groundObstacleTextures[UnityEngine.Random.Range(0, theme.groundObstacleTextures.Length)];
+                                }
+                                else
+                                {
+                                    --groundObstacleWait;
+                                }
+                            }
+                            else
                             {
                                 --groundObstacleWait;
                             }
-                        } else
-                        {
-                            --groundObstacleWait;
                         }
                     }
-                }
 
+                }
+                // updating last J
+                lastJ = j;
             }
-            // updating last J
-            lastJ = j;
         }
         // updating the lastGroundLevel for future iterations
         lastGrounLevel = currentGroundLevel;
-        Debug.Log("last J");
-        Debug.Log(lastJ);
+        // updating the bonusCouldown for future itterations
+        bonusCouldown -= 1;
+
         return lastJ;
     }
 
-    private bool generateCeiling(int i, ThemeTemplate theme, int startingJ, bool isCeilingBefore)
+    private bool generateCeiling(ref int i, ThemeTemplate theme, int startingJ, bool isCeilingBefore)
     {
         int lastJ = startingJ;
         bool isCeilingNow = false;
@@ -210,8 +281,32 @@ public class BasicalLevelGenerator : MonoBehaviour
         bgImage.sprite = theme.background;
     }
 
+    private void setPortalTextures(GameObject portal, ThemeTemplate theme)
+    {
+        GameObject borders = portal.transform.Find("Borders").gameObject;
+        GameObject centers = portal.transform.Find("Center").gameObject;
+
+        // setting textures for externals blocks
+        foreach (Transform border in borders.transform)
+        {
+            border.gameObject.GetComponent<SpriteRenderer>().sprite = theme.portalBorderTexture;
+        }
+
+        //setting textures for inner blocks
+        foreach (Transform center in centers.transform)
+        {
+            center.gameObject.GetComponent<SpriteRenderer>().sprite = theme.portalCenterTexture;
+        }
+    }
+
     private void Start()
     {
+        // isntanciate variables
+        groundSize = levelHeight * 0.3;
+        ceilingSize = levelHeight * 0.4;
+
+
+
         Debug.Log("oeoeoe");
         generate();
         Debug.Log("oeuf");

@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerActions : MonoBehaviour
@@ -54,6 +55,7 @@ public class PlayerActions : MonoBehaviour
     }
 
     // handle all player colisions 
+    /**
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
@@ -66,6 +68,7 @@ public class PlayerActions : MonoBehaviour
             onObstacleColissionEnter(collision);
         }
     }
+    */
 
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -79,18 +82,23 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            onObstacleColissionEnter(collision);
+        }
+    }
+
     // handle collisions with ground
     private void onGroundColissionEnter(Collision2D collision)
     {
-        // Print how many points are colliding with this transform
-        Debug.Log("Points colliding: " + collision.contacts.Length);
+
         foreach (var colisionItem in collision.contacts)
         {
         //var colisionItem = collision.contacts[0];
 
-
-            // Print the normal of the first point in the collision.
-            Debug.Log("Normal of the first point: " + colisionItem.normal);
             // left size
             if (colisionItem.normal.y <= -1.0)
             {
