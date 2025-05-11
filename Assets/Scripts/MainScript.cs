@@ -11,16 +11,21 @@ public class MainScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (optionsMenu.activeSelf)
-            {
-                optionsMenu.SetActive(false);
-                Time.timeScale = 1f; // Resume the game
-            }
-            else
-            {
-                optionsMenu.SetActive(true);
-                Time.timeScale = 0f; // Pause the game
-            }
+            playPauseGame();
+        }
+    }
+
+    public void playPauseGame()
+    {
+        if (optionsMenu.activeSelf)
+        {
+            optionsMenu.SetActive(false);
+            Time.timeScale = 1f; // Resume the game
+        }
+        else
+        {
+            optionsMenu.SetActive(true);
+            Time.timeScale = 0f; // Pause the game
         }
     }
 

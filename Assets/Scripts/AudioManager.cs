@@ -42,7 +42,6 @@ public class AudioManager : MonoBehaviour
 
     public void PlayFinishSound()
     {
-
         // play random sounds 
         int index = UnityEngine.Random.Range(0, theme.finishSound.Length);
         SFXSource.clip = theme.finishSound[index];
