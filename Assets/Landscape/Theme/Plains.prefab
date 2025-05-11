@@ -77,3 +77,14 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f9ed929c21d2a224eae491783e4553b5, type: 3}
   portalBorderTexture: {fileID: 21300000, guid: 79f745f78fd29d7428ff5b53c6791ebd, type: 3}
   portalCenterTexture: {fileID: 21300000, guid: a64eaa0c503fdf843ba0d501c22cef0b, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: fbe42aed183029945a649f0b8acd2686, type: 3}
+  - {fileID: 8300000, guid: 4807b368499cc404eb49a2fa078a32f8, type: 3}
+  - {fileID: 8300000, guid: 3bb087b30fd2ae542b321591efe28e49, type: 3}
+  - {fileID: 8300000, guid: 0b4b56f474f46914ab304a425c9d212f, type: 3}
+  - {fileID: 8300000, guid: e0b91803cf4edae4d827b4620ff65b78, type: 3}
+  - {fileID: 8300000, guid: 98d9b693d4a07c74abef32fea6a2319d, type: 3}
+  - {fileID: 8300000, guid: ce8343c45a72d204ba7b02198c9ff50e, type: 3}
+  finishSound:
+  - {fileID: 8300000, guid: f756854a00a77fe42a4492f767c36ce0, type: 3}
+  backgroundMusic: {fileID: 8300000, guid: 30f8706107e95834184bb65d8a4d4519, type: 3}

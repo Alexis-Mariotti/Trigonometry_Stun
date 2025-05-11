@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &316699233488197796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6471271297671106535}
+  - component: {fileID: 5995508736615827284}
+  m_Layer: 0
+  m_Name: Nether
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6471271297671106535
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316699233488197796}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.61183, y: -0.91303, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5995508736615827284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316699233488197796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af66fe66b4379b74e8d72148c09f2255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  background: {fileID: 21300000, guid: 3c315c23fc702d34bac29e224226c2d1, type: 3}
+  deepTextures:
+  - {fileID: 21300000, guid: 62c2fac46b3163a4697b2b09ad1e5fd4, type: 3}
+  - {fileID: 21300000, guid: dc3ca824df7f0574aba161d821b681e1, type: 3}
+  - {fileID: 21300000, guid: 159983532fc8a6c449015db22d9ad615, type: 3}
+  groundTextures:
+  - {fileID: 21300000, guid: dc3ca824df7f0574aba161d821b681e1, type: 3}
+  - {fileID: 21300000, guid: 5d0663717dc1c574f85a64a5711805b2, type: 3}
+  ceilingTextures:
+  - {fileID: 21300000, guid: 79f745f78fd29d7428ff5b53c6791ebd, type: 3}
+  - {fileID: 21300000, guid: dc3ca824df7f0574aba161d821b681e1, type: 3}
+  waterObstacleTextures:
+  - {fileID: 21300000, guid: 4b2944a7718c6f54d9bfdb13ed02c4b5, type: 3}
+  groundObstacleTextures:
+  - {fileID: 21300000, guid: 7f0064dc8e6697a45913e9486d1e1d14, type: 3}
+  - {fileID: 21300000, guid: e94a997c52feadb4fa961a7ac877004a, type: 3}
+  - {fileID: 21300000, guid: 97de98048e1064e4c9998b9d7036b7a6, type: 3}
+  - {fileID: 21300000, guid: 38879423b75636a499cd2efd177bf745, type: 3}
+  - {fileID: 21300000, guid: 2a39f6000e423ff40879a8e7747ca753, type: 3}
+  - {fileID: 21300000, guid: 7574a9970ca86c64dae2c116d3f7fdaa, type: 3}
+  - {fileID: 21300000, guid: c2c400e62870bd54095d40bee0c1ae7f, type: 3}
+  ceilingObstacleTextures:
+  - {fileID: 21300000, guid: 299ff8d27589cc24c90ea0bce04ebb50, type: 3}
+  - {fileID: 21300000, guid: f9ed929c21d2a224eae491783e4553b5, type: 3}
+  portalBorderTexture: {fileID: 21300000, guid: 335393442482a4d4f85afda80bf99f15, type: 3}
+  portalCenterTexture: {fileID: 21300000, guid: a9fb8a4f72333ee488739ea6dae01d02, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: fbe42aed183029945a649f0b8acd2686, type: 3}
+  - {fileID: 8300000, guid: 4807b368499cc404eb49a2fa078a32f8, type: 3}
+  - {fileID: 8300000, guid: 3bb087b30fd2ae542b321591efe28e49, type: 3}
+  - {fileID: 8300000, guid: 0b4b56f474f46914ab304a425c9d212f, type: 3}
+  - {fileID: 8300000, guid: e0b91803cf4edae4d827b4620ff65b78, type: 3}
+  - {fileID: 8300000, guid: 98d9b693d4a07c74abef32fea6a2319d, type: 3}
+  - {fileID: 8300000, guid: ce8343c45a72d204ba7b02198c9ff50e, type: 3}
+  finishSound:
+  - {fileID: 8300000, guid: f756854a00a77fe42a4492f767c36ce0, type: 3}
+  backgroundMusic: {fileID: 8300000, guid: 9f5f81bc5dbdde445827a4174508576b, type: 3}

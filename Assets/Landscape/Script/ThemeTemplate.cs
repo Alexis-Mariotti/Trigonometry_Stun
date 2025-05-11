@@ -18,6 +18,10 @@ public class ThemeTemplate : MonoBehaviour
     public Sprite portalBorderTexture;
     public Sprite portalCenterTexture;
 
+    public AudioClip[] deathSounds;
+    public AudioClip[] finishSound;
+    public AudioClip backgroundMusic;
+
 
 
     private void Start()
