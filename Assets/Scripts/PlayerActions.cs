@@ -26,7 +26,7 @@ public class PlayerActions : MonoBehaviour
 
     private void OnDisable()
     {
-        PlayerPrefs.SetInt($"tryMap{lvlIdx}", 0);
+        PlayerPrefs.SetInt($"tryMap{lvlIdx}", currentTry);
         PlayerPrefs.Save();
     }
 

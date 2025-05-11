@@ -5,6 +5,7 @@ public class AudioManager : MonoBehaviour
     [Header("--------- Audio Sources -----------")]
     [SerializeField] AudioSource musicSource;
     [SerializeField] AudioSource SFXSource;
+    [SerializeField] AudioSource clickSound;
 
     [Header("--------- Audio Clip -----------")]
     public AudioClip background;
@@ -17,5 +18,10 @@ public class AudioManager : MonoBehaviour
 
         SFXSource.clip = ambianceSound;
         SFXSource.Play();
+    }
+
+    public void Click()
+    {
+        clickSound.Play();
     }
 }

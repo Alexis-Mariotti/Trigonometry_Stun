@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Collections;
 
 public class MainScript : MonoBehaviour
 {
@@ -13,10 +14,12 @@ public class MainScript : MonoBehaviour
             if (optionsMenu.activeSelf)
             {
                 optionsMenu.SetActive(false);
+                Time.timeScale = 1f; // Resume the game
             }
             else
             {
                 optionsMenu.SetActive(true);
+                Time.timeScale = 0f; // Pause the game
             }
         }
     }
