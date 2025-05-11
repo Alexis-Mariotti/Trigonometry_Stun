@@ -7,12 +7,16 @@ public class PlayerActions : MonoBehaviour
     public ParticleSystem deathParticules;
     public Vector2 spawnCoordinates;
 
+    public MainScript mainScript;
+
+    public AudioManager audioManager;
+
     private Transform playerTransform;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerTransform = transform;
-        
+
     }
 
     // Update is called once per frame
@@ -25,7 +29,8 @@ public class PlayerActions : MonoBehaviour
     {
 
         // TODO: increase death score
-        // TODO: play death sound
+
+        audioManager.PlayDeathSound();
 
 
         Instantiate(deathParticules, transform.position, Quaternion.identity);
@@ -54,6 +59,12 @@ public class PlayerActions : MonoBehaviour
         playerTransform.SetPositionAndRotation(spawnCoordinates, Quaternion.identity);
     }
 
+    private void finish()
+    {
+        audioManager.PlayFinishSound();
+        mainScript.GoHome();
+    }
+
     // handle all player colisions 
     /**
     private void OnCollisionEnter2D(Collision2D collision)
@@ -70,17 +81,7 @@ public class PlayerActions : MonoBehaviour
     }
     */
 
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            onGroundColissionEnter(collision);
-        }
-        if (collision.gameObject.CompareTag("Obstacle"))
-        {
-            onObstacleColissionEnter(collision);
-        }
-    }
+
 
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -89,69 +90,93 @@ public class PlayerActions : MonoBehaviour
         {
             onObstacleColissionEnter(collision);
         }
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            onGroundColissionEnter(collision);
+        }
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            finish();
+        }
     }
 
     // handle collisions with ground
     private void onGroundColissionEnter(Collision2D collision)
     {
+        /**
+        float angleThreshold = 10f;
+        bool shouldDie = false;
+        float contactMargin = 0.2f;
 
         foreach (var colisionItem in collision.contacts)
         {
-        //var colisionItem = collision.contacts[0];
+            //var colisionItem = collision.contacts[0];
+
+            Vector2 localPoint = transform.InverseTransformPoint(colisionItem.point);
 
             // left size
-            if (colisionItem.normal.y <= -1.0)
+            if (Vector2.Angle(colisionItem.normal, Vector2.left) < angleThreshold && localPoint.x < -contactMargin)
             {
-                Dead();
+                shouldDie = true;
             }
             // top size
-            else if (colisionItem.normal.x >= 1.0)
+            else if (Vector2.Angle(colisionItem.normal, Vector2.up) < angleThreshold && localPoint.y < -contactMargin)
             {
 
             }
             // rigth size
-            else if (colisionItem.normal.y >= 1.0)
+            else if (Vector2.Angle(colisionItem.normal, Vector2.right) < angleThreshold && localPoint.x > contactMargin)
             {
 
             }
             // bottom size
-            else if (colisionItem.normal.x <= -1.0)
+            else if (Vector2.Angle(colisionItem.normal, Vector2.down) < angleThreshold && localPoint.y > contactMargin )
             {
-                Dead();
+                shouldDie = true;
             }
         }
+        // kill if should die
+        if (shouldDie)
+        {
+            Dead();
+        }
+        */
     }
 
     // handle colisions with obstacle
     private void onObstacleColissionEnter(Collision2D collision)
     {
+
+        Dead();
+
+
+        /*
+        float angleThreshold = 10f;
+         
         foreach (var colisionItem in collision.contacts)
         {
-        //var colisionItem = collision.contacts[0];
+            //var colisionItem = collision.contacts[0];
             // left size
-            if (colisionItem.normal.y <= -1.0)
+            if (Vector2.Angle(colisionItem.normal, Vector2.left) < angleThreshold)
             {
                 Dead();
-
             }
             // top size
-            else if(colisionItem.normal.x >= 1.0)
+            else if (Vector2.Angle(colisionItem.normal, Vector2.up) < angleThreshold)
             {
-                Dead();
 
             }
             // rigth size
-            else if(colisionItem.normal.y >= 1.0)
+            else if (Vector2.Angle(colisionItem.normal, Vector2.right) < angleThreshold)
             {
-                Dead();
 
             }
             // bottom size
-            else if(colisionItem.normal.x <= -1.0)
+            else if (Vector2.Angle(colisionItem.normal, Vector2.down) < angleThreshold)
             {
                 Dead();
-
             }
         }
+        */
     }
 }

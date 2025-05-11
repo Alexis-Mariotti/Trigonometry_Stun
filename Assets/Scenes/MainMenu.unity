@@ -2104,6 +2104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionsMenu: {fileID: 750157465}
+  txtTry: {fileID: 0}
 --- !u!114 &389791140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2819,7 +2820,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: ExampleScene1
+          m_StringArgument: Level2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &694153781
@@ -2952,7 +2953,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: MainGame
+          m_StringArgument: Level1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &710458878
@@ -5171,6 +5172,7 @@ MonoBehaviour:
   SFXSource: {fileID: 2059208294}
   background: {fileID: 8300000, guid: 5747d926e00c5c24f8d561a8d214e2e8, type: 3}
   ambianceSound: {fileID: 8300000, guid: f5937fb1a2818ec42a7cb303ff0a7ac1, type: 3}
+  theme: {fileID: 0}
 --- !u!1 &1650551526
 GameObject:
   m_ObjectHideFlags: 0

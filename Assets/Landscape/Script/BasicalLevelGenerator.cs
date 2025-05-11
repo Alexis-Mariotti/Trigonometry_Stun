@@ -44,6 +44,11 @@ public class BasicalLevelGenerator : MonoBehaviour
         groundObstacleWait = 5;
         // instanciate lastgroundlevel
         lastGrounLevel = (int)Math.Round(groundSize);
+
+        // start by genering the platform at the start of the level
+        generateStartPlatform(theme);
+
+        // star genering the real level
         for (int i = 0; i < levelLength; i++)
         {
             int lastJ = 0;
@@ -67,6 +72,14 @@ public class BasicalLevelGenerator : MonoBehaviour
 
         // Setting the textures from the theme
         setPortalTextures(portal, theme);
+    }
+
+    private void generateStartPlatform(ThemeTemplate theme)
+    {
+        for (int i = -30; i < 0; i++)
+        {
+            generateUnderground(ref i, theme);
+        }
     }
 
     private int generateUnderground(ref int i, ThemeTemplate theme)
