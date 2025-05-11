@@ -36,6 +36,12 @@ public class MainScript : MonoBehaviour
 
     public void GoHome()
     {
+        StartCoroutine(GoHomeCoroutine());
+    }
+
+    private IEnumerator GoHomeCoroutine()
+    {
+        yield return new WaitForSeconds(0.1f);
         SceneManager.LoadScene("MainMenu");
     }
 }
