@@ -318,11 +318,6 @@ public class BasicalLevelGenerator : MonoBehaviour
         groundSize = levelHeight * 0.3;
         ceilingSize = levelHeight * 0.4;
 
-
-
-        Debug.Log("oeoeoe");
         generate();
-        Debug.Log("oeuf");
-
     }
 }
