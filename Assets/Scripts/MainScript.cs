@@ -41,7 +41,9 @@ public class MainScript : MonoBehaviour
 
     private IEnumerator GoHomeCoroutine()
     {
-        yield return new WaitForSeconds(0.1f);
+        Time.timeScale = 1f; // Resume the game
+
+        yield return new WaitForSeconds(0.3f);
         SceneManager.LoadScene("MainMenu");
     }
 }
