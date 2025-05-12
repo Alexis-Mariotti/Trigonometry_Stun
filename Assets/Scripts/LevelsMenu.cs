@@ -16,4 +16,13 @@ public class LevelsMenu : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         SceneManager.LoadScene(levelName);
     }
+
+    public void resetTries(int max)
+    {
+        for (int i = 0; i < max; i++)
+        {
+            PlayerPrefs.SetInt($"tryMap{i}", 0);
+        }
+        PlayerPrefs.Save();
+    }
 }
