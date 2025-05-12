@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+
 
 [System.Serializable]
 public class BasicalLevelGenerator : MonoBehaviour
@@ -319,5 +321,22 @@ public class BasicalLevelGenerator : MonoBehaviour
         ceilingSize = levelHeight * 0.4;
 
         generate();
+    }
+
+    public IEnumerator reloadTheMap(float waitingTime)
+    {
+        yield return new WaitForSeconds(waitingTime);
+
+        // destroy all the instanciated blocks
+        foreach (Transform child in transform.GetComponentsInChildren<Transform>())
+        {
+            if (child != transform)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+        // generate a new level
+        generate();
+
     }
 }

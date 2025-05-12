@@ -48,6 +48,12 @@ public class PlayerActions : MonoBehaviour
 
         audioManager.PlayDeathSound();
 
+        // find the BasicalLevelGenerator
+        BasicalLevelGenerator levelGenerator = GameObject.FindObjectOfType<BasicalLevelGenerator>();
+
+        StartCoroutine(levelGenerator.reloadTheMap((float) (deathParticules.main.duration)));
+
+
         Instantiate(deathParticules, transform.position, Quaternion.identity);
         // wait for particules to end and teleport to spawwn point
         StartCoroutine(waitForParticulesEndAndRespawn(deathParticules.main.duration));
@@ -69,6 +75,8 @@ public class PlayerActions : MonoBehaviour
 
         respawn();
     }
+
+    
 
     private void respawn()
     {
