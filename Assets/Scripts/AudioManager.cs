@@ -5,6 +5,7 @@ public class AudioManager : MonoBehaviour
     [Header("--------- Audio Sources -----------")]
     [SerializeField] AudioSource musicSource;
     [SerializeField] AudioSource SFXSource;
+    [SerializeField] AudioSource clickSound;
 
     [Header("--------- Audio Clip -----------")]
     public AudioClip background;
@@ -41,7 +42,6 @@ public class AudioManager : MonoBehaviour
 
     public void PlayFinishSound()
     {
-
         // play random sounds 
         int index = UnityEngine.Random.Range(0, theme.finishSound.Length);
         SFXSource.clip = theme.finishSound[index];
@@ -53,5 +53,10 @@ public class AudioManager : MonoBehaviour
         // loop
         musicSource.clip = theme.backgroundMusic;
         musicSource.Play();
+    }
+
+    public void Click()
+    {
+        clickSound.Play();
     }
 }

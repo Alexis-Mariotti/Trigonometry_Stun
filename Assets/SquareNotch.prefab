@@ -199,5 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathParticules: {fileID: 4972407635626889447, guid: 2077bda0c93db3d4d87898d6e7bd5af2, type: 3}
   spawnCoordinates: {x: 0, y: 0}
+  txtTry: {fileID: 0}
+  lvlIdx: 
   mainScript: {fileID: 0}
   audioManager: {fileID: 0}
