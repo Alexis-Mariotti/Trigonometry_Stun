@@ -153,7 +153,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 8
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 46a308106e166f24f84a3b3ad0591a41, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -162,7 +162,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &4444437421919264214
 MonoBehaviour:
@@ -178,6 +178,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   jumpForce: 20
+  shipThrust: 10
+  rocketBoostForce: 30
+  flyingModeSpeed: 20
+  flyingAngleChange: 20
+  flyingLiftForce: 5
+  isShipMode: 0
+  isFlyingMode: 0
 --- !u!114 &3911332035511983932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,3 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathParticules: {fileID: 4972407635626889447, guid: 2077bda0c93db3d4d87898d6e7bd5af2, type: 3}
   spawnCoordinates: {x: 0, y: 0}
+  txtTry: {fileID: 0}
+  lvlIdx: 
+  mainScript: {fileID: 0}
+  audioManager: {fileID: 0}

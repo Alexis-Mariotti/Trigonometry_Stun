@@ -1,48 +1,32 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Collections;
 
 public class MainScript : MonoBehaviour
 {
     public GameObject optionsMenu;
-    public TMP_Text txtTry;
-
-    private int currentTry;
-
-    private void OnDisable()
-    {
-        PlayerPrefs.SetInt("tryMap1", currentTry);
-        PlayerPrefs.Save();
-    }
-
-    private void Start()
-    {
-        currentTry = PlayerPrefs.GetInt("tryMap1", 0);
-        if (txtTry != null)
-        {
-            txtTry.text = currentTry.ToString();
-        }
-    }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (optionsMenu.activeSelf)
-            {
-                optionsMenu.SetActive(false);
-            }
-            else
-            {
-                optionsMenu.SetActive(true);
-            }
+            playPauseGame();
         }
     }
 
-    public void AddTry()
+    public void playPauseGame()
     {
-        currentTry++;
-        txtTry.text = currentTry.ToString();
+        if (optionsMenu.activeSelf)
+        {
+            optionsMenu.SetActive(false);
+            Time.timeScale = 1f; // Resume the game
+        }
+        else
+        {
+            optionsMenu.SetActive(true);
+            Time.timeScale = 0f; // Pause the game
+        }
     }
 
     public void QuitGame()
@@ -52,6 +36,14 @@ public class MainScript : MonoBehaviour
 
     public void GoHome()
     {
+        StartCoroutine(GoHomeCoroutine());
+    }
+
+    private IEnumerator GoHomeCoroutine()
+    {
+        Time.timeScale = 1f; // Resume the game
+
+        yield return new WaitForSeconds(0.3f);
         SceneManager.LoadScene("MainMenu");
     }
 }
